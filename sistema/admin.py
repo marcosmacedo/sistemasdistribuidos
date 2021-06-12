@@ -9,3 +9,4 @@ class VacunacionAdmin(admin.ModelAdmin):
 admin.site.register(Vacuna)
 admin.site.register(Vacunacion, VacunacionAdmin)
 admin.site.register(Persona)
+admin.site.register(Vacunatorio)

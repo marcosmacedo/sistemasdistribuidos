@@ -34,7 +34,7 @@ class Vacuna(models.Model):
     laboratorio = models.CharField('Laboratorio', max_length=200)
 
     def __str__(self):
-        return self.nombre
+        return self.nombre + ' de ' + self.laboratorio
 
 class Vacunatorio(models.Model):
     class Meta: 
