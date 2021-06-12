@@ -46,6 +46,9 @@ class Vacunatorio(models.Model):
     def __str__(self):
         return self.nombre
 
+    def __str__(self):
+        return self.nombre
+
 class Vacunacion(models.Model):
     class Meta: 
         verbose_name = "Vacunacion"
