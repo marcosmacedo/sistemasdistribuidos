@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import AbstractUser
 
 
 class Persona(models.Model):
@@ -15,6 +16,7 @@ class Persona(models.Model):
         (dni, 'Documento Nacional de Identificación (Arg)'),
     )
     tipoDeDocumento = models.CharField(
+        'Tipo de documento',
         max_length=5,
         choices=tiposDeDocumentoElec,
         default=cedulaDeIdentidad,
@@ -53,10 +55,16 @@ class Vacunacion(models.Model):
     class Meta: 
         verbose_name = "Vacunacion"
         verbose_name_plural = "Vacunacion"
-    vacuna = models.ForeignKey(Vacuna, on_delete=models.RESTRICT)
-    persona = models.ForeignKey(Persona, on_delete=models.RESTRICT)
+    vacuna = models.ForeignKey(Vacuna, on_delete=models.PROTECT)
+    persona = models.ForeignKey(Persona, on_delete=models.PROTECT)
     fecha = models.DateTimeField('Día')
-    vacunatorio = models.ForeignKey(Vacunatorio, on_delete=models.RESTRICT)
+    vacunatorio = models.ForeignKey(Vacunatorio, on_delete=models.PROTECT)
 
     def __str__(self):
         return self.persona.nombre + ' - ' + self.vacuna.nombre 
+
+class Usuario(AbstractUser):
+    vacunatorio = models.ForeignKey(Vacunatorio, on_delete=models.PROTECT, null=True, blank=False)
+    class Meta: 
+        verbose_name = "Usuario"
+        verbose_name_plural = "Usuarios"
