@@ -5,6 +5,14 @@ from .models import *
 
 class VacunacionAdmin(admin.ModelAdmin):
     list_display = ('vacuna','persona', 'fecha', 'vacunatorio')
+    autocomplete_fields = ['persona', 'vacunatorio']
+
+class PersonaAdmin(admin.ModelAdmin):
+    search_fields = ['nombre']
+
+class VacunatorioAdmin(admin.ModelAdmin):
+    search_fields = ['nombre']
+
 
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
         if db_field.name == "vacunatorio":
